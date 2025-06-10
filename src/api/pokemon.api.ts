@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { usePokemon } from "../providers/PokemonProvider";
 import type { AllPokemonItem, PokemonDetail } from "../types/pokemon";
 
