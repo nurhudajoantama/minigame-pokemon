@@ -1,10 +1,20 @@
 import React from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const PokemonContext = React.createContext<any>({});
+interface PokemonContextType {
+  tangkapPokemon: (name: string) => boolean;
+  renamePokemon: (pokemonName: string, newName: string) => void;
+  releasePokemon: (pokemonName: string) => void;
+  pokemonTertangkap: Record<string, string>;
+}
 
-// eslint-disable-next-line react-refresh/only-export-components
+const PokemonContext = React.createContext<PokemonContextType>({
+  tangkapPokemon: () => false,
+  renamePokemon: () => {},
+  releasePokemon: () => {},
+  pokemonTertangkap: {},
+});
+
 export const usePokemon = () => {
   const context = React.useContext(PokemonContext);
   if (!context) {
