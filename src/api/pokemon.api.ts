@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+import { usePokemon } from "../providers/PokemonProvider";
+import type { AllPokemonItem, PokemonDetail } from "../types/pokemon";
 
 export const getPokemonDetail = async (name: string) => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
-  return response.json();
+  return (await response.json()) as PokemonDetail;
 };
 
 export const getAllPokemons = async () => {
@@ -13,13 +15,21 @@ export const getAllPokemons = async () => {
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
-  return (await response.json()).results;
+  return (await response.json()).results as AllPokemonItem[];
 };
 
 export const useGetAllPokemons = () => {
+  const { pokemonTertangkap } = usePokemon();
   return useQuery({
     queryKey: ["all-pokemons"],
-    queryFn: getAllPokemons,
+    queryFn: async () => {
+      const pokemons = await getAllPokemons();
+      const promises = pokemons.map(async (pokemon) => {
+        const detail = await getPokemonDetail(pokemon.name);
+        return { ...pokemon, detail, userName: pokemonTertangkap[pokemon.name] };
+      });
+      return Promise.all(promises);
+    },
   });
 };
 
