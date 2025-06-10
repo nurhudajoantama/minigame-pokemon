@@ -1,54 +1,77 @@
-# React + TypeScript + Vite
+# Mini Game Pokemon
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Pokémon-themed mini-game built with React, TypeScript, Vite, React Query, and Tailwind CSS. Catch Pokémon, view details, and manage your personal Pokédex.
 
-Currently, two official plugins are available:
+## Features
+- Browse a list of Pokémon with sprites and basic info
+- View detailed stats and abilities in a modal
+- Attempt to catch Pokémon and handle success or failure
+- Rename or release caught Pokémon in your Pokédex
+- Responsive UI styled with Tailwind CSS
+- Client-side state management via React Context and localStorage
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React 18 + TypeScript
+- Vite for development and build
+- React Router DOM for client-side routing
+- @tanstack/react-query for data fetching
+- Tailwind CSS for styling
 
-## Expanding the ESLint configuration
+## Prerequisites
+- Node.js >= 14.x
+- npm or pnpm installed globally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Installation
+1. Clone the repo:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+   ```bash
+   git clone https://github.com/nurhudajoantama/minigame-pokemon
+   cd minigame-pokemon
+   ```
+
+2. Install dependencies (using npm):
+
+   ```bash
+   npm install
+   ```
+
+   Or with pnpm:
+
+   ```bash
+   pnpm install
+   ```
+
+## Running the Project
+
+- Start development server with hot reload:
+
+  ```bash
+  npm run dev
+  ```
+
+- Build for production:
+
+  ```bash
+  npm run build
+  ```
+
+- Preview the production build:
+
+  ```bash
+  npm run preview
+  ```
+
+## Project Structure
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+src/
+├─ api/           # API calls to PokéAPI
+├─ components/    # UI components (Navbar, Footer, Loader)
+├─ hooks/         # Custom React hooks
+├─ Layout/        # Main layout with navbar and footer
+├─ Pages/         # Route pages: Home (Index), Pokedex
+├─ providers/     # React Context for Pokémon state
+├─ services/      # Business logic for catching/releasing
+├─ types/         # TypeScript types
+├─ App.tsx        # Root component with routing
+└─ main.tsx       # App entry point
 ```
